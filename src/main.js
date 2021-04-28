@@ -1,1 +1,142 @@
-"use strict";var e=require("cesium"),t={HomeButtonToolTip:"\u521d\u59cb\u89c6\u56fe",Imagery:"\u5f71\u50cf",Terrain:"\u5730\u5f62",Other:"\u5176\u4ed6","Bing Maps Aerial":"\u5fc5\u5e94\u822a\u7a7a\u5730\u56fe","Bing Maps Aerial with Labels":"\u5fc5\u5e94\u822a\u7a7a\u5730\u56fe\uff08\u5e26\u6807\u6ce8\uff09","Bing Maps Roads":"\u5fc5\u5e94\u9053\u8def\u5730\u56fe","Sentinel-2":"\u54e8\u5175\u536b\u661f\u5f71\u50cf-2","Blue Marble":"\u84dd\u8272\u5f39\u73e0","Earth at night":"\u5730\u7403\u4e4b\u591c","Natural Earth&nbsp;II":"\u81ea\u7136\u5730\u7403II","ESRI World Imagery":"ESRI \u5f71\u50cf","ESRI World Street Map":"ESRI \u9053\u8def","ESRI National Geographic":"ESRI \u81ea\u7136\u5730\u7406","Open\xadStreet\xadMap":"Open\xadStreet\xadMap\u77e2\u91cf","Stamen Watercolor":"\u96c4\u854a\u5f69\u8272","Stamen Toner":"\u96c4\u854a\u9ed1\u767d","WGS84 Ellipsoid":"WGS84 \u692d\u7403","Cesium World Terrain":"Cesium \u4e16\u754c\u5730\u5f62\u56fe",">Mouse":">\u9f20\u6807",">Touch":">\u624b\u52bf","Left click + drag":"\u5de6\u952e+\u62d6\u62fd","Right click + drag, or":"\u53f3\u952e+\u62d6\u62fd\uff0c\u6216\u8005","Mouse wheel scroll":"\u6eda\u52a8\u9f20\u6807\u6eda\u8f6e","Middle click + drag, or":"\u4e2d\u952e + \u62d6\u52a8,\u6216\u8005","CTRL + Left/Right click + drag":"CTRL +\u5de6/\u53f3 \u5355\u51fb+\u62d6\u62fd","One finger drag":"\u5355\u6307\u62d6\u52a8","Two finger pinch":"\u53cc\u6307\u634f\u5408","Two finger drag, same direction":"\u53cc\u6307\u540c\u5411\u62d6\u52a8","Two finger drag, opposite direction":"\u53cc\u6307\u53cd\u5411\u62d6\u52a8","Pan view":"\u5e73\u79fb","Zoom view":"\u7f29\u653e","Rotate view":"\u65cb\u8f6c","Tilt view":"\u503e\u659c\u89c6\u56fe",GeocodersPlaceholder:"\u8bf7\u8f93\u5165\u5730\u540d\u6216\u5750\u6807",SceneModePickerToolTip2D:"\u4e8c\u7ef4",SceneModePickerToolTip3D:"\u4e09\u7ef4",SceneModePickerToolTipView:"\u54e5\u4f26\u5e03\u89c6\u56fe",NavigationInstructions:"\u5e2e\u52a9","Mapbox Satellite":"Mapbox \u536b\u661f\u5f71\u50cf","Mapbox Streets":"Mapbox \u9053\u8def","Mapbox Streets Classic":"Mapbox \u9053\u8def\uff08\u5206\u7c7b\uff09",NavigationHelpButtonToolTip:"\u64cd\u4f5c\u6307\u5357",enterFullScreen:"\u5168\u5c4f",exitFullScreen:"\u9000\u51fa\u5168\u5c4f"},i=function(e,i){void 0===i&&(i={}),this._viewer=e,this._lang=Object.assign({},t,i),this.init()},n={viewer:{configurable:!0},lang:{configurable:!0}};n.viewer.get=function(){return this._viewer},n.lang.get=function(){return this._lang},i.prototype.init=function(){this._translateHomeButton(),this._translateBaseLayerPicker(),this._translateHelpButton(),this._translateGeocoder(),this._translateSceneModePicker(),this._translateFullscreenButton()},i.prototype._isUnf=function(e,t){return void 0===e[t]},i.prototype._getEleByCls=function(e,t,i){var n=e.getElementsByClassName(t);return i&&i(n),n},i.prototype._translateDom=function(e,t,i){for(var n=this._getEleByCls(e,t),o=0;o<n.length;o++){var r=n[o].innerHTML;this._isUnf(this.lang,r)||(n[o].innerHTML=this.lang[r],i&&i(n[o]))}},i.prototype._isDefined=function(t){return!e.defined(this.viewer[t])},i.prototype._translateHomeButton=function(){this._isDefined("homeButton")||(this.viewer.homeButton.viewModel.tooltip=this.lang.HomeButtonToolTip)},i.prototype._translateBaseLayerPicker=function(){if(!this._isDefined("baseLayerPicker")){var e=this.viewer.container;this._translateDom(e,"cesium-baseLayerPicker-sectionTitle"),this._translateDom(e,"cesium-baseLayerPicker-categoryTitle"),this._translateDom(e,"cesium-baseLayerPicker-itemLabel")}},i.prototype._translateHelpButton=function(){var e=this;if(!this._isDefined("navigationHelpButton")){this.viewer.navigationHelpButton.viewModel.tooltip=this.lang.NavigationInstructions;var t=this.viewer.container,i=this._getEleByCls(t,"cesium-navigation-button");[">Mouse",">Touch"].forEach((function(t,n){e._isUnf(e.lang,t)||(i[n].innerHTML=i[n].innerHTML.replace(t,e.lang[t]))})),this._translateDom(t,"cesium-navigation-help-details",(function(t){var i=t.parentNode.children[0];e._isUnf(e.lang,i.innerHTML)||(i.innerHTML=e.lang[i.innerHTML])}))}},i.prototype._translateGeocoder=function(){var e=this;this._isDefined("geocoder")||this._getEleByCls(this.viewer.container,"cesium-geocoder-input").forEach((function(t){t.setAttribute("placeholder",e.lang.GeocodersPlaceholder)}))},i.prototype._translateSceneModePicker=function(){if(!this._isDefined("sceneModePicker")){var e=this.viewer.sceneModePicker.viewModel;e.tooltip2D=this.lang.SceneModePickerToolTip2D,e.tooltip3D=this.lang.SceneModePickerToolTip3D,e.tooltipColumbusView=this.lang.SceneModePickerToolTipView}},i.prototype._translateFullscreenButton=function(){if(!this._isDefined(t)){var t=this.viewer.fullscreenButton,i=this.lang,n=i.exitFullScreen,o=i.enterFullScreen,r=e.knockout.getObservable(t.viewModel,"isFullscreen");delete t.viewModel.tooltip,e.knockout.defineProperty(t.viewModel,"tooltip",(function(){return t.viewModel.isFullscreenEnabled?r()?n:o:"Full screen unavailable"}));var a=t.container.getElementsByClassName("cesium-fullscreenButton")[0];e.knockout.cleanNode(a),e.knockout.applyBindings(t.viewModel,a)}},Object.defineProperties(i.prototype,n),module.exports=i;
+import { defined, knockout } from "cesium";
+import defaultLangs from './defaultLangs'
+
+/** Cesium 本地化类 */
+export default class CesiumLocale {
+  /**
+   *
+   * @param {*} viewer - Cesium Viewer实例对象
+   * @param {*} langs - 本地化配置列表
+   */
+  constructor(viewer, langs = {}) {
+    this._viewer = viewer;
+    this._lang = {
+      ...defaultLangs,
+      ...langs,
+    };
+
+    this.init();
+  }
+
+  get viewer() {
+    return this._viewer;
+  }
+
+  get lang() {
+    return this._lang;
+  }
+
+  init() {
+    this._translateHomeButton();
+    this._translateBaseLayerPicker();
+    this._translateHelpButton();
+    this._translateGeocoder();
+    this._translateSceneModePicker();
+    this._translateFullscreenButton();
+  }
+
+  _isUnf(obj, prop) {
+    return typeof obj[prop] === "undefined";
+  }
+
+  _getEleByCls(el, classname, cb) {
+    const ele = el.getElementsByClassName(classname);
+    cb && cb(ele);
+    return ele;
+  }
+
+  _translateDom(el, classname, cb) {
+    let eles = this._getEleByCls(el, classname);
+    for (let i = 0; i < eles.length; i++) {
+      const str = eles[i].innerHTML;
+      if (!this._isUnf(this.lang, str)) {
+        eles[i].innerHTML = this.lang[str];
+        cb && cb(eles[i]);
+      }
+    }
+  }
+
+  _isDefined(prop) {
+    return !defined(this.viewer[prop]);
+  }
+
+  // 本地化 HomeButton
+  _translateHomeButton() {
+    if (this._isDefined("homeButton")) return;
+    this.viewer.homeButton.viewModel.tooltip = this.lang.HomeButtonToolTip;
+  }
+
+  // 本地化BaseLayerPicker
+  _translateBaseLayerPicker() {
+    if (this._isDefined("baseLayerPicker")) return;
+    const { container } = this.viewer;
+    this._translateDom(container, "cesium-baseLayerPicker-sectionTitle");
+    this._translateDom(container, "cesium-baseLayerPicker-categoryTitle");
+    this._translateDom(container, "cesium-baseLayerPicker-itemLabel");
+  }
+
+  // 本地化HelpButton
+  _translateHelpButton() {
+    if (this._isDefined("navigationHelpButton")) return;
+    this.viewer.navigationHelpButton.viewModel.tooltip = this.lang.NavigationInstructions;
+    const { container } = this.viewer;
+    const nodes = this._getEleByCls(container, "cesium-navigation-button");
+
+    [">Mouse", ">Touch"].forEach((text, i) => {
+      if (!this._isUnf(this.lang, text)) {
+        nodes[i].innerHTML = nodes[i].innerHTML.replace(text, this.lang[text]);
+      }
+    });
+
+    this._translateDom(container, "cesium-navigation-help-details", (ele) => {
+      const span = ele.parentNode.children[0];
+      if (!this._isUnf(this.lang, span.innerHTML)) {
+        span.innerHTML = this.lang[span.innerHTML];
+      }
+    });
+  }
+
+  _translateGeocoder() {
+    if (this._isDefined("geocoder")) return;
+    let geocoders = this._getEleByCls(
+      this.viewer.container,
+      "cesium-geocoder-input"
+    );
+    geocoders.forEach((geocoder) => {
+      geocoder.setAttribute("placeholder", this.lang.GeocodersPlaceholder);
+    });
+  }
+
+  // 本地化 sceneModePicker
+  _translateSceneModePicker() {
+    if (this._isDefined("sceneModePicker")) return;
+    const { viewModel } = this.viewer.sceneModePicker;
+    viewModel.tooltip2D = this.lang.SceneModePickerToolTip2D;
+    viewModel.tooltip3D = this.lang.SceneModePickerToolTip3D;
+    viewModel.tooltipColumbusView = this.lang.SceneModePickerToolTipView;
+  }
+
+  // 本地化全屏按钮
+  _translateFullscreenButton() {
+    if (this._isDefined(fullscreenButton)) return;
+    const { fullscreenButton } = this.viewer;
+    const { exitFullScreen, enterFullScreen } = this.lang;
+    let tmpIsFullscreen = knockout.getObservable(
+      fullscreenButton.viewModel,
+      "isFullscreen"
+    );
+    delete fullscreenButton.viewModel.tooltip;
+    knockout.defineProperty(fullscreenButton.viewModel, "tooltip", function () {
+      if (!fullscreenButton.viewModel.isFullscreenEnabled) {
+        return "Full screen unavailable";
+      }
+      return tmpIsFullscreen() ? exitFullScreen : enterFullScreen;
+    });
+    // 重新绑定全屏按钮
+    let fullScreenButtonElement = fullscreenButton.container.getElementsByClassName(
+      "cesium-fullscreenButton"
+    )[0];
+    knockout.cleanNode(fullScreenButtonElement);
+    knockout.applyBindings(fullscreenButton.viewModel, fullScreenButtonElement);
+  }
+}
