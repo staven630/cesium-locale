@@ -1,7 +1,8 @@
 {
   "name": "cesium-locale",
   "version": "1.0.0",
-  "description": "",
+  "private": false,
+  "description": "A plugin that makes ceisum.js easy to be translated into Chinese",
   "main": "./lib/cesium-locale.js",
   "module": "./lib/cesium-locale.esm.js",
   "browser": "./lib/cesium-locale.umd.js",
@@ -9,11 +10,18 @@
     "lib": "npx rollup --config",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "3d",
+    "cesium",
+    "Cesium",
+    "cesiumjs",
+    "cesium-locale",
+    "cesium-plugin"
+  ],
+  "author": "staven630 <20287710@qq.com> (https://github.com/staven630)",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "devDependencies": {
     "@babel/core": "^7.13.16",
@@ -28,6 +36,14 @@
   "dependencies": {
     "cesium": "^1.80.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/staven630/cesium-locale.git"
+  },
+  "bugs": {
+    "url": "https://github.com/staven630/cesium-locale/issues"
+  },
+  "license": "MIT",
   "homepage": "git@github.com:staven630/cesium-locale.git",
   "sideEffects": false
 }
