@@ -1,6 +1,6 @@
 {
   "name": "cesium-locale",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "A plugin that makes ceisum.js easy to be translated into Chinese",
   "main": "./lib/cesium-locale.js",
